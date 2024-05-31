@@ -1,54 +1,37 @@
+import { Tabs } from 'expo-router';
 import React from 'react';
 
-import {Tabs} from "expo-router";
-import {TabBarIcon} from "@/components/navigation/TabBarIcon";
+import { TabBarIcon } from '@/components/navigation/TabBarIcon';
+import { Colors } from '@/constants/Colors';
+import { useColorScheme } from '@/hooks/useColorScheme';
 
-const AuthLayout = () => {
+export default function TabLayout() {
+  const colorScheme = useColorScheme();
+
   return (
     <Tabs
       screenOptions={{
+        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarActiveTintColor: 'blue'
-      }} >
+      }}>
       <Tabs.Screen
-        name="home"
+        name="index"
         options={{
-          title: 'Главная',
+          title: 'Home',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="favorites"
+        name="explore"
         options={{
-          title: 'Избранное',
+          title: 'Explore',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'heart' : 'heart-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="createRecipe"
-        options={{
-          title: 'Добавить рецепт',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'add-circle' : 'add-circle-outline'} color={color} />
-          ),
-        }}
-      />
-      {/*todo: показывать когда авторизован*/}
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Профиль',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'person' : 'person-outline'} color={color} />
+            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
           ),
         }}
       />
     </Tabs>
-  )
-};
-
-export default AuthLayout;
+  );
+}
