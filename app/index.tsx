@@ -1,6 +1,7 @@
-import {SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {StatusBar} from "expo-status-bar";
 import {router} from "expo-router";
+import {Images} from "@/constants/Images";
 
 export default function Index() {
 
@@ -11,18 +12,14 @@ export default function Index() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar />
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text>Страница входа в приложение</Text>
-        <TouchableOpacity style={styles.button} onPress={onPress}>
-          <Text>Press Here</Text>
-        </TouchableOpacity>
-      </View>
+      <ImageBackground source={Images.food} resizeMode="cover" style={styles.imageBackground}>
+        <View style={styles.content}>
+          <Text style={styles.text}>Cooking canvas</Text>
+          <TouchableOpacity style={styles.button} onPress={onPress}>
+            <Text style={[styles.text, styles.buttonText]}>Продолжить</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
     </SafeAreaView>
   );
 }
@@ -33,7 +30,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  imageBackground: {
+    width: '100%',
+    height: '100%'
+  },
+  content: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 50
+  },
+  text: {
+    color: 'white',
+    fontSize: 40,
+  },
   button: {
 
+  },
+  buttonText: {
+    fontSize: 16,
   }
 }) as any;

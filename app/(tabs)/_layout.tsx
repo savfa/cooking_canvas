@@ -7,7 +7,7 @@ const AuthLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
         tabBarActiveTintColor: 'blue'
       }} >
       <Tabs.Screen

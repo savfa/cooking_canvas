@@ -10,7 +10,7 @@ const AuthLayout = () => {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: 'blue'
+        tabBarActiveTintColor: 'blue',
       }} >
       <Tabs.Screen
         name="login"
