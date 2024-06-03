@@ -12,6 +12,7 @@ import {
 import {router} from "expo-router";
 import {Images} from "@/constants/Images";
 import FormField from "@/components/FormField";
+import ButtonPrimary from "@/components/ButtonPrimary";
 
 export default function Index() {
 
@@ -35,10 +36,10 @@ export default function Index() {
           </View>
           <FormField placeholder="Email адрес" ironIconName="mail" />
           <FormField placeholder="Пароль" ironIconName="key" secureTextEntry />
-          <TouchableOpacity style={[styles.button]} onPress={onPress}>
-            <Text style={[styles.text, styles.buttonText]}>Вход</Text>
-          </TouchableOpacity>
-          <Text style={[styles.text, styles.textQuestion]}>У вас нет аккаунта? {' '}
+
+          <ButtonPrimary text="вход" handlePress={onPress} />
+
+          <Text style={[styles.text, styles.textQuestion]}>У вас еще нет аккаунта? {' '}
               <Text  style={[styles.textQuestion, styles.textQuestionInner]} onPress={handleQuestion}>Зарегистрироваться</Text>
           </Text>
         </View>
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   content: {
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
     flex: 1,
     paddingLeft: 35,
     paddingRight: 35,
@@ -78,22 +80,7 @@ const styles = StyleSheet.create({
   loginText: {
     fontSize: 33,
   },
-  button: {
-    width: '100%',
-    borderRadius: 20,
-    borderColor: 'white',
-    borderWidth: 2,
-  },
-  buttonText: {
-    fontSize: 25,
-    lineHeight: 30,
-    textTransform: 'uppercase',
-    paddingTop: 8,
-    paddingBottom: 8,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
+
   textQuestion: {
 
     fontSize: 16,
