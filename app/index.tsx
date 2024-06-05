@@ -4,24 +4,32 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  TextInput,
-  TouchableOpacity,
   View
 } from "react-native";
 
 import {router} from "expo-router";
-import {Images} from "@/constants/Images";
+import {Images} from "@/helpers/constants/Images";
 import FormField from "@/components/FormField";
 import ButtonPrimary from "@/components/ButtonPrimary";
+import {useEffect} from "react";
+import {AppOperation} from "@/store/app/app";
+import {AppRoute} from "@/helpers/constants/routes";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "@/store";
 
 export default function Index() {
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(AppOperation.checkAuth())
+  }, [dispatch])
 
   const onPress = () => {
-    router.push('/login')
+    router.push(AppRoute.LOGIN)
   }
 
   const handleQuestion = () => {
-    router.push('/register')
+    router.push(AppRoute.REGISTER)
   }
 
   return (

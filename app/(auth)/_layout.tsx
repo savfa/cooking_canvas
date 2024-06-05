@@ -1,9 +1,8 @@
 import React from 'react';
 
-import {Text, View} from 'react-native';
-import {Colors} from "@/constants/Colors";
 import {Tabs} from "expo-router";
 import {TabBarIcon} from "@/components/navigation/TabBarIcon";
+import {AppRoute} from "@/helpers/constants/routes";
 
 const AuthLayout = () => {
   return (
@@ -13,7 +12,7 @@ const AuthLayout = () => {
         tabBarActiveTintColor: 'blue',
       }} >
       <Tabs.Screen
-        name="login"
+        name={AppRoute.LOGIN.replace(`/`, ``)}
         options={{
           title: 'Вход',
           tabBarIcon: ({ color, focused }) => (
@@ -22,7 +21,7 @@ const AuthLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="register"
+        name={AppRoute.REGISTER.replace(`/`, ``)}
         options={{
           title: 'Регистрация',
           tabBarIcon: ({ color, focused }) => (

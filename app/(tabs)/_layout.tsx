@@ -2,6 +2,7 @@ import React from 'react';
 
 import {Tabs} from "expo-router";
 import {TabBarIcon} from "@/components/navigation/TabBarIcon";
+import {AppRoute} from "@/helpers/constants/routes";
 
 const AuthLayout = () => {
   return (
@@ -11,7 +12,7 @@ const AuthLayout = () => {
         tabBarActiveTintColor: 'blue'
       }} >
       <Tabs.Screen
-        name="home"
+        name={AppRoute.HOME.replace(`/`, ``)}
         options={{
           title: 'Главная',
           tabBarIcon: ({ color, focused }) => (
@@ -20,7 +21,7 @@ const AuthLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="favorites"
+        name={AppRoute.FAVORITES.replace(`/`, ``)}
         options={{
           title: 'Избранное',
           tabBarIcon: ({ color, focused }) => (
@@ -29,7 +30,7 @@ const AuthLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="createRecipe"
+        name={AppRoute.CREATE_RECIPE.replace(`/`, ``)}
         options={{
           title: 'Добавить рецепт',
           tabBarIcon: ({ color, focused }) => (
@@ -39,7 +40,7 @@ const AuthLayout = () => {
       />
       {/*todo: показывать когда авторизован*/}
       <Tabs.Screen
-        name="profile"
+        name={AppRoute.PROFILE.replace(`/`, ``)}
         options={{
           title: 'Профиль',
           tabBarIcon: ({ color, focused }) => (
