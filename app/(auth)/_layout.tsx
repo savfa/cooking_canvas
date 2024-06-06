@@ -10,6 +10,7 @@ const AuthLayout = () => {
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: 'blue',
+        tabBarStyle: { display: 'none' }, // скрываем tabBar
       }} >
       <Tabs.Screen
         name={AppRoute.LOGIN.replace(`/`, ``)}

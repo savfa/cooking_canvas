@@ -7,30 +7,43 @@ import {
   View
 } from "react-native";
 
-import {router} from "expo-router";
 import {Images} from "@/helpers/constants/Images";
-import FormField from "@/components/FormField";
-import ButtonPrimary from "@/components/ButtonPrimary";
 import {useEffect} from "react";
 import {AppOperation} from "@/store/app/app";
-import {AppRoute} from "@/helpers/constants/routes";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch} from "@/store";
+import {getAuthorizationStatus} from "@/store/app/selectors";
+import {router} from "expo-router";
+import {AppRoute} from "@/helpers/constants/routes";
 
 export default function Index() {
   const dispatch = useDispatch<AppDispatch>();
+  const authorizationStatus = useSelector(getAuthorizationStatus);
 
   useEffect(() => {
     dispatch(AppOperation.checkAuth())
   }, [dispatch])
 
-  const onPress = () => {
-    router.push(AppRoute.LOGIN)
-  }
+  useEffect(() => {
+    const preview = setTimeout(() => {
+      switch (authorizationStatus) {
+        case `WAIT_SERVER_RESPONSE`:
+        case `NO_AUTH`:
+          router.push(AppRoute.LOGIN);
+          break;
+        case `AUTH`:
+          router.push(AppRoute.HOME);
+          break;
+        default:
+          break;
+      }
+    }, 2000);
 
-  const handleQuestion = () => {
-    router.push(AppRoute.REGISTER)
-  }
+    return () => {
+      clearTimeout(preview);
+    }
+  }, [authorizationStatus]);
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -39,17 +52,8 @@ export default function Index() {
         <View style={styles.content}>
           <View>
             <Text style={styles.text}>Cooking canvas</Text>
-            <Text style={[styles.text, styles.description]}>Создай свои кулинарные рецепты</Text>
-            <Text style={[styles.text, styles.loginText]}>Вход</Text>
+            <Text style={[styles.text, styles.description]}>Твой кулинарный холст</Text>
           </View>
-          <FormField placeholder="Email адрес" ironIconName="mail" />
-          <FormField placeholder="Пароль" ironIconName="key" secureTextEntry />
-
-          <ButtonPrimary text="вход" handlePress={onPress} />
-
-          <Text style={[styles.text, styles.textQuestion]}>У вас еще нет аккаунта? {' '}
-              <Text  style={[styles.textQuestion, styles.textQuestionInner]} onPress={handleQuestion}>Зарегистрироваться</Text>
-          </Text>
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -83,20 +87,6 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
-    fontWeight: 'semibold',
-  },
-  loginText: {
-    fontSize: 33,
-  },
-
-  textQuestion: {
-
-    fontSize: 16,
-  },
-  textQuestionInner: {
-    color: '#FF6B00',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
+    fontWeight: 500,
   }
 }) as any;

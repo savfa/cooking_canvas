@@ -35,7 +35,7 @@ const app = createSlice({
     }),
     setUser: (state: any, action: any): any => ({
       ...state,
-      authorizationStatus: action.payload,
+      user: action.payload,
     }),
   },
 });
@@ -44,7 +44,6 @@ const { actions, reducer }: any = app;
 
 const Operation = {
   checkAuth: () => async (dispatch: AppDispatch, getState: () => StoreState, api: AxiosInstance) => {
-    console.log(`here`)
     const token = await getUserAuthToken();
     if (!token) {
       dispatch(actions.setAuthorization(AuthorizationStatus.NO_AUTH));

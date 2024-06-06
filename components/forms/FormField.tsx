@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import {StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const FormField = ({ placeholder, style, ironIconName, secureTextEntry, ...props}: any) => {
+const FormField = ({ placeholder, style, beforeIronIconName, handleBeforeIcon, afterIronIconName, handleAfterIcon, secureTextEntry, ...props}: any) => {
   const [isSecure, setIsSecure] = useState(!!secureTextEntry);
 
   return (
     <View style={styles.container}>
-      <Ionicons size={28} style={styles.leftIcon} name={ironIconName} />
+      {beforeIronIconName && (
+        <Ionicons size={28} style={styles.leftIcon} name={beforeIronIconName} {...(handleBeforeIcon && {onPress: handleBeforeIcon})} />
+      )}
       <TextInput
         placeholder={placeholder}
         placeholderTextColor="white"
@@ -16,6 +18,9 @@ const FormField = ({ placeholder, style, ironIconName, secureTextEntry, ...props
         secureTextEntry={isSecure}
         style={[styles.input, style]}
         {...props}/>
+      {afterIronIconName && (
+        <Ionicons size={28} style={styles.leftIcon} name={afterIronIconName} {...(handleAfterIcon && {onPress: handleAfterIcon})} />
+      )}
       {secureTextEntry && (
         <Ionicons
           size={28}
