@@ -14,7 +14,8 @@ import ButtonPrimary from "@/components/ButtonPrimary";
 import {AppRoute} from "@/helpers/constants/routes";
 import {useDispatch} from "react-redux";
 import {AppDispatch} from "@/store";
-import {useMemo} from "react";
+import {useCallback, useMemo, useState} from "react";
+import {AppOperation} from "@/store/app/app";
 
 interface Iprops {
   isLogin?: boolean;
@@ -26,6 +27,14 @@ const AuthForm =  (props: Iprops) => {
 
   const dispatch = useDispatch<AppDispatch>();
 
+  const [values, setValues] = useState<any>({name: ``, email: ``, password: ``, confirmPassword: ``});
+
+  const handleChange = useCallback((name: string, value: string) => {
+    setValues((prevState: any) => {
+      return {...prevState, [name]: value}
+    })
+  }, [])
+
   const {
     title,
     submitButtonText,
@@ -36,7 +45,7 @@ const AuthForm =  (props: Iprops) => {
   } = useMemo(() => {
     let title = ``;
     let submitButtonText = ``;
-    let handleSubmit = () => ``;
+    let handleSubmit = (): any => ``;
     let questionText = ``;
     let questionActionText = ``;
     let handleQuestion = (): any => null;
@@ -44,7 +53,9 @@ const AuthForm =  (props: Iprops) => {
     if (isLogin) {
       title = `Вход`;
       submitButtonText = `войти`;
-      handleSubmit = () => ``;
+      handleSubmit = () => {
+        dispatch(AppOperation.login({ email: values.email, password: values.password }))
+      };
       questionText = `У вас еще нет аккаунта? `;
       questionActionText = `Зарегистрироваться`;
       handleQuestion = () => router.push(AppRoute.REGISTER)
@@ -52,14 +63,16 @@ const AuthForm =  (props: Iprops) => {
     if (isRegister) {
       title = `регистрация`;
       submitButtonText = `зарегистрироваться`;
-      handleSubmit = () => ``;
+      handleSubmit = () => {
+        dispatch(AppOperation.register({name: values.name, email: values.email, password: values.password }))
+      };
       questionText = `У вас уже есть аккаунт? `;
       questionActionText = `Войти`;
       handleQuestion = () => router.push(AppRoute.LOGIN)
     }
 
     return { title, submitButtonText, handleSubmit, questionText, questionActionText, handleQuestion }
-  }, [isLogin, isRegister])
+  }, [isLogin, isRegister, values])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -76,12 +89,12 @@ const AuthForm =  (props: Iprops) => {
             </View>
 
             {isRegister && (
-              <FormField placeholder="Имя" beforeIronIconName="person" />
+              <FormField placeholder="Имя" beforeIronIconName="person" onChangeText={(value: string) => handleChange(`name`, value)}/>
             )}
-            <FormField placeholder="Email адрес" beforeIronIconName="mail" />
-            <FormField placeholder="Пароль" beforeIronIconName="key" secureTextEntry />
+            <FormField placeholder="Email адрес" beforeIronIconName="mail" onChangeText={(value: string) => handleChange(`email`, value)}/>
+            <FormField placeholder="Пароль" beforeIronIconName="key" secureTextEntry onChangeText={(value: string) => handleChange(`password`, value)}/>
             {isRegister && (
-              <FormField placeholder="Подтвердите пароль" beforeIronIconName="key" secureTextEntry />
+              <FormField placeholder="Подтвердите пароль" beforeIronIconName="key" secureTextEntry onChangeText={(value: string) => handleChange(`confirmPassword`, value)}/>
             )}
 
             <ButtonPrimary text={submitButtonText} handlePress={handleSubmit} />

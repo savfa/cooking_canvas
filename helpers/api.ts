@@ -14,7 +14,7 @@ export const ServerError = {
   INTERNAL_SERVER: 500,
 };
 
-export const BASE_SERVER_URL = `http://localhost:3001`;
+export const BASE_SERVER_URL = `http://192.168.0.108:3001`;
 const DISABLE_LOADER = `disableLoader`;
 
 let dispatch: any;

@@ -4,7 +4,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {deleteUserAuthToken} from "@/helpers/utils/asyncStorage";
 import NameSpace from "@/store/NameSpace";
 import {createAPI, setDispatch} from "@/helpers/api";
-import { appReducer } from "@/store/app/app";
+import { appReducer} from "@/store/app/app";
 
 
 const api = createAPI(async () => {

@@ -13,7 +13,7 @@ export const getUserAuthToken = async () => {
 
 export const setUserAuthToken = async (token: string) => {
   try {
-    await AsyncStorage.setItem(TOKEN, JSON.stringify(token));
+    return await AsyncStorage.setItem(TOKEN, JSON.stringify(token));
   } catch (e) {
     // saving error
   }
@@ -21,7 +21,7 @@ export const setUserAuthToken = async (token: string) => {
 
 export const deleteUserAuthToken = async () => {
   try {
-    await AsyncStorage.removeItem(TOKEN)
+   return await AsyncStorage.removeItem(TOKEN)
   } catch(e) {
     // remove error
   }

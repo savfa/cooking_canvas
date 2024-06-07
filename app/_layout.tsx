@@ -1,5 +1,5 @@
-import { Stack } from 'expo-router';
-import {Provider, useDispatch} from "react-redux";
+import {router, Stack} from 'expo-router';
+import {Provider, useSelector} from "react-redux";
 import store from "@/store";
 
 export default function RootLayout() {
