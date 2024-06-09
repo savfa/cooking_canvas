@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import NameSpace from "../NameSpace";
-import { AxiosInstance } from "axios";
+import { AxiosError, AxiosInstance } from "axios";
 import { AppDispatch, StoreState } from "@/store";
 import {
   deleteUserAuthToken,
   getUserAuthToken,
   setUserAuthToken,
 } from "@/helpers/utils/asyncStorage";
-import { setAPIAuthHeaders } from "@/helpers/api";
 import { ServerURL } from "@/helpers/constants/routes";
+import { setAPIAuthHeaders } from "@/helpers/utils/setAPIAuthHeaders";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -67,7 +67,7 @@ const Operation = {
 
           return user;
         })
-        .catch(() => {
+        .catch((error: AxiosError) => {
           dispatch(actions.setAuthorization(AuthorizationStatus.NO_AUTH));
           // todo нужно делать запрос на рефреш токен
           deleteUserAuthToken();
@@ -90,16 +90,21 @@ const Operation = {
   login:
     ({ email, password }: { email: string; password: string }) =>
     (dispatch: AppDispatch, getState: () => StoreState, api: AxiosInstance) =>
-      api.post(ServerURL.LOGIN, { email, password }).then((response) => {
-        const {
-          user,
-          token: { access: accessToken },
-        } = response.data;
+      api
+        .post(ServerURL.LOGIN, { email, password })
+        .then((response) => {
+          const {
+            user,
+            token: { access: accessToken },
+          } = response.data;
 
-        dispatch(Operation.authorizeUser(user, accessToken));
+          dispatch(Operation.authorizeUser(user, accessToken));
 
-        return user;
-      }),
+          return user;
+        })
+        .catch((error: AxiosError) => {
+          console.log(error);
+        }),
   register:
     ({
       name,
@@ -122,6 +127,9 @@ const Operation = {
           dispatch(Operation.authorizeUser(user, accessToken));
 
           return user;
+        })
+        .catch((error: AxiosError) => {
+          console.log(error);
         }),
   logout:
     () =>

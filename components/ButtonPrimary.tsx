@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { Pressable, StyleSheet, Text } from "react-native";
 
 interface InterfaceButtonPrimary {
   text: string;
@@ -12,15 +12,20 @@ const ButtonPrimary = ({
   handlePress,
   style,
   ...rest
-}: InterfaceButtonPrimary) => (
-  <TouchableOpacity
-    style={[styles.button, style]}
-    activeOpacity={0.5}
-    onPress={handlePress}
-    {...rest}>
-    <Text style={[styles.buttonText]}>{text}</Text>
-  </TouchableOpacity>
-);
+}: InterfaceButtonPrimary) => {
+  const [opacity, setOpacity] = useState(1);
+
+  return (
+    <Pressable
+      style={[styles.button, style, { opacity }]}
+      onPress={handlePress}
+      onPressIn={() => setOpacity(0.5)}
+      onPressOut={() => setOpacity(1)}
+      {...rest}>
+      <Text style={[styles.buttonText]}>{text}</Text>
+    </Pressable>
+  );
+};
 
 export default ButtonPrimary;
 
