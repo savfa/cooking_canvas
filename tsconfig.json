@@ -12,6 +12,14 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "expo-env.d.ts",
+    ".eslintrc"
+  ],
+  "exclude": [
+    "%ProgramData%",
+    "node_modules",
+    ".expo",
+    "android",
+    "ios"
   ]
 }

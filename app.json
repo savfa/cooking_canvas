@@ -4,7 +4,7 @@
     "slug": "cooking_canvas",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/egg.png",
+    "icon": "./assets/images/app_icon.jpg",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/egg.png",
+        "foregroundImage": "./assets/images/app_icon.jpg",
         "backgroundColor": "#ffffff"
       },
       "package": "com.test.cooking_canvas"
@@ -25,7 +25,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/egg.png"
+      "favicon": "./assets/images/app_icon.jpg"
     },
     "plugins": [
       "expo-router"

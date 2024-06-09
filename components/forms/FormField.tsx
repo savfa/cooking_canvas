@@ -1,15 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import {StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const FormField = ({ placeholder, style, beforeIronIconName, handleBeforeIcon, afterIronIconName, handleAfterIcon, secureTextEntry, ...props}: any) => {
+const FormField = ({
+  placeholder,
+  style,
+  beforeIronIconName,
+  handleBeforeIcon,
+  afterIronIconName,
+  handleAfterIcon,
+  secureTextEntry,
+  ...props
+}: any) => {
   const [isSecure, setIsSecure] = useState(!!secureTextEntry);
 
   return (
     <View style={styles.container}>
       {beforeIronIconName && (
-        <Ionicons size={28} style={styles.leftIcon} name={beforeIronIconName} {...(handleBeforeIcon && {onPress: handleBeforeIcon})} />
+        <Ionicons
+          size={28}
+          style={styles.leftIcon}
+          name={beforeIronIconName}
+          {...(handleBeforeIcon && { onPress: handleBeforeIcon })}
+        />
       )}
       <TextInput
         placeholder={placeholder}
@@ -17,19 +37,24 @@ const FormField = ({ placeholder, style, beforeIronIconName, handleBeforeIcon, a
         selectionColor="transparent"
         secureTextEntry={isSecure}
         style={[styles.input, style]}
-        {...props}/>
+        {...props}
+      />
       {afterIronIconName && (
-        <Ionicons size={28} style={styles.leftIcon} name={afterIronIconName} {...(handleAfterIcon && {onPress: handleAfterIcon})} />
+        <Ionicons
+          size={28}
+          style={styles.leftIcon}
+          name={afterIronIconName}
+          {...(handleAfterIcon && { onPress: handleAfterIcon })}
+        />
       )}
       {secureTextEntry && (
         <Ionicons
           size={28}
-          name={isSecure ? `eye` : `eye-off` }
+          name={isSecure ? `eye` : `eye-off`}
           style={styles.rightIcon}
           onPress={() => setIsSecure(!isSecure)}
         />
-        )
-      }
+      )}
     </View>
   );
 };
@@ -38,26 +63,26 @@ export default FormField;
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
     borderBottomWidth: 1,
-    borderBottomColor: 'white',
+    borderBottomColor: "white",
   },
   input: {
     flex: 1,
     fontSize: 18,
     height: 50,
     paddingHorizontal: 10,
-    color: 'white',
-    backgroundColor: 'transparent',
+    color: "white",
+    backgroundColor: "transparent",
   },
   leftIcon: {
-    color: 'white',
+    color: "white",
     marginRight: 10,
   },
   rightIcon: {
-    color: 'white',
+    color: "white",
     marginLeft: 10,
   },
 }) as any;
