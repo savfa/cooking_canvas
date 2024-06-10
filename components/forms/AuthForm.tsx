@@ -116,25 +116,25 @@ const AuthForm = (props: Iprops) => {
             {isRegister && (
               <FormField
                 placeholder="Имя"
-                beforeIronIconName="person"
+                beforeIconName="person"
                 onChangeText={(value: string) => handleChange(`name`, value)}
               />
             )}
             <FormField
               placeholder="Email адрес"
-              beforeIronIconName="mail"
+              beforeIconName="mail"
               onChangeText={(value: string) => handleChange(`email`, value)}
             />
             <FormField
               placeholder="Пароль"
-              beforeIronIconName="key"
+              beforeIconName="key"
               secureTextEntry
               onChangeText={(value: string) => handleChange(`password`, value)}
             />
             {isRegister && (
               <FormField
                 placeholder="Подтвердите пароль"
-                beforeIronIconName="key"
+                beforeIconName="key"
                 secureTextEntry
                 onChangeText={(value: string) =>
                   handleChange(`confirmPassword`, value)

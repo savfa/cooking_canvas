@@ -1,33 +1,42 @@
 import React, { useState } from "react";
 
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { StyleSheet, TextInput, View } from "react-native";
+import Octicons from "@expo/vector-icons/Octicons";
 
-const FormField = ({
-  placeholder,
-  style,
-  beforeIronIconName,
-  handleBeforeIcon,
-  afterIronIconName,
-  handleAfterIcon,
-  secureTextEntry,
-  ...props
-}: any) => {
+interface IFormField {
+  placeholder?: string;
+  containerStyle?: any;
+  inputStyle?: any;
+  beforeIconName?: string | any;
+  handleBeforeIcon?: () => void;
+  afterIconName?: string | any;
+  handleAfterIcon?: () => void;
+  secureTextEntry?: boolean;
+  [key: string]: any; // остаточный параметр
+}
+
+const FormField = (props: IFormField) => {
+  const {
+    placeholder,
+    containerStyle,
+    inputStyle,
+    beforeIconName,
+    handleBeforeIcon,
+    afterIconName,
+    handleAfterIcon,
+    secureTextEntry,
+    ...rest
+  } = props;
+
   const [isSecure, setIsSecure] = useState(!!secureTextEntry);
 
   return (
-    <View style={styles.container}>
-      {beforeIronIconName && (
-        <Ionicons
+    <View style={[styles.container, containerStyle]}>
+      {beforeIconName && (
+        <Octicons
           size={28}
           style={styles.leftIcon}
-          name={beforeIronIconName}
+          name={beforeIconName}
           {...(handleBeforeIcon && { onPress: handleBeforeIcon })}
         />
       )}
@@ -36,21 +45,21 @@ const FormField = ({
         placeholderTextColor="white"
         selectionColor="transparent"
         secureTextEntry={isSecure}
-        style={[styles.input, style]}
-        {...props}
+        style={[styles.input, inputStyle]}
+        {...rest}
       />
-      {afterIronIconName && (
-        <Ionicons
+      {afterIconName && (
+        <Octicons
           size={28}
           style={styles.leftIcon}
-          name={afterIronIconName}
+          name={afterIconName}
           {...(handleAfterIcon && { onPress: handleAfterIcon })}
         />
       )}
       {secureTextEntry && (
-        <Ionicons
+        <Octicons
           size={28}
-          name={isSecure ? `eye` : `eye-off`}
+          name={isSecure ? `eye` : `eye-closed`}
           style={styles.rightIcon}
           onPress={() => setIsSecure(!isSecure)}
         />

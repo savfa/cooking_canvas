@@ -16,18 +16,18 @@ const AuthLayout = () => {
       <Tabs
         screenOptions={{
           headerShown: true,
-          tabBarActiveTintColor: "blue",
+          tabBarActiveTintColor: "#000",
+          tabBarInactiveTintColor: "#707070",
         }}>
         <Tabs.Screen
           name={AppRoute.HOME.replace(`/`, ``)}
           options={{
+            headerShown: false,
             title: "Главная",
             tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon
-                name={focused ? "home" : "home-outline"}
-                color={color}
-              />
+              <TabBarIcon name="home" color={color} />
             ),
+            tabBarLabel: ``,
           }}
         />
         <Tabs.Screen
@@ -35,11 +35,9 @@ const AuthLayout = () => {
           options={{
             title: "Избранное",
             tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon
-                name={focused ? "heart" : "heart-outline"}
-                color={color}
-              />
+              <TabBarIcon name="heart" color={color} />
             ),
+            tabBarLabel: ``,
           }}
         />
         <Tabs.Screen
@@ -47,11 +45,9 @@ const AuthLayout = () => {
           options={{
             title: "Добавить рецепт",
             tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon
-                name={focused ? "add-circle" : "add-circle-outline"}
-                color={color}
-              />
+              <TabBarIcon name="plus" color={color} />
             ),
+            tabBarLabel: ``,
           }}
         />
         {/* todo: показывать когда авторизован */}
@@ -60,11 +56,9 @@ const AuthLayout = () => {
           options={{
             title: "Профиль",
             tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon
-                name={focused ? "person" : "person-outline"}
-                color={color}
-              />
+              <TabBarIcon name="person" color={color} />
             ),
+            tabBarLabel: ``,
           }}
         />
       </Tabs>
