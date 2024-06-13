@@ -5,12 +5,13 @@ import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { AppRoute } from "@/helpers/constants/routes";
 import { useSelector } from "react-redux";
 import { getAuthorizationStatus } from "@/store/app/selectors";
+import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
 
 const AuthLayout = () => {
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
   return (
-    <>
+    <SafeAreaView style={styles.safeArea}>
       {authorizationStatus !== `AUTH` && <Redirect href={AppRoute.LOGIN} />}
 
       <Tabs
@@ -18,6 +19,12 @@ const AuthLayout = () => {
           headerShown: true,
           tabBarActiveTintColor: "#000",
           tabBarInactiveTintColor: "#707070",
+          tabBarIconStyle: {
+            marginTop: 10,
+          },
+          tabBarStyle: {
+            backgroundColor: "#5f720f",
+          },
         }}>
         <Tabs.Screen
           name={AppRoute.HOME.replace(`/`, ``)}
@@ -62,8 +69,16 @@ const AuthLayout = () => {
           }}
         />
       </Tabs>
-    </>
+    </SafeAreaView>
   );
 };
 
 export default AuthLayout;
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#c1d64d",
+    paddingTop: Platform.OS === "ios" ? 0 : StatusBar.currentHeight,
+  },
+}) as any;

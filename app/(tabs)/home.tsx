@@ -1,96 +1,72 @@
 import React from "react";
 
 import {
+  Dimensions,
+  FlatList,
   Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  useWindowDimensions,
   View,
 } from "react-native";
 import Header from "@/components/Header";
 import RecipeCard from "@/components/RecipeCard";
 
-const Home = () => (
-  <SafeAreaView style={styles.container}>
-    <StatusBar barStyle="dark-content" />
-    <ScrollView
-      contentContainerStyle={styles.scrollView}
-      stickyHeaderIndices={[0]}
-      showsVerticalScrollIndicator={false}>
-      <Header />
+const { width } = Dimensions.get("window");
 
-      <RecipeCard />
+const Home = () => {
+  const { width } = useWindowDimensions();
 
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-    </ScrollView>
-  </SafeAreaView>
-);
+  return (
+    <View style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        stickyHeaderIndices={[0]}
+        showsVerticalScrollIndicator={false}>
+        <Header />
+
+        <FlatList
+          contentContainerStyle={{ gap: 10 }}
+          numColumns={2}
+          columnWrapperStyle={{ gap: 10 }}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          renderItem={(item) => <RecipeCard style={styles.item} />}
+          data={[
+            { key: 1 },
+            { key: 2 },
+            { key: 3 },
+            { key: 4 },
+            { key: 5 },
+            { key: 6 },
+            { key: 7 },
+            { key: 8 },
+          ]}
+        />
+      </ScrollView>
+    </View>
+  );
+};
 
 export default Home;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingLeft: 16,
-    paddingRight: 16,
-    paddingTop: Platform.OS === "ios" ? 0 : 20,
+    backgroundColor: "#c1d64d",
   },
   scrollView: {
     minWidth: "100%",
     minHeight: "100%",
+  },
+  item: {
+    maxWidth: (width - 10) / 2,
+  },
+  title: {
+    fontSize: 32,
   },
 }) as any;

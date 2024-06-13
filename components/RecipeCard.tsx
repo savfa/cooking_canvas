@@ -1,13 +1,13 @@
 import React from "react";
 
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, View, StyleSheet, Image, Platform } from "react-native";
 import Octicons from "@expo/vector-icons/Octicons";
 import { Images } from "@/helpers/constants/Images";
 
 const RecipeCard = (props: any) => {
-  const { size = "l" } = props;
+  const { size = "l", style, ...rest } = props;
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View
         style={{
           display: "flex",
@@ -35,7 +35,7 @@ const RecipeCard = (props: any) => {
           <Text>10:00</Text>
         </View>
         {/* todo рэйтинг */}
-        <View style={{display: 'flex', flexDirection: 'row', gap: 3}}>
+        <View style={{ display: "flex", flexDirection: "row", gap: 3 }}>
           <Octicons size={15} name="star" style={styles.star} />
           <Octicons size={15} name="star" style={styles.star} />
           <Octicons size={15} name="star" style={styles.star} />
@@ -51,11 +51,22 @@ export default RecipeCard;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#707070",
+    backgroundColor: "gray",
     borderRadius: 16,
     width: "100%",
     maxHeight: 216,
     padding: 10,
+    ...Platform.select({
+      ios: {
+        shadowColor: "black",
+        shadowOpacity: 0.2,
+        shadowRadius: 15,
+        shadowOffset: { width: 0, height: 2 },
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
   },
   favorite: {},
   star: {
