@@ -23,7 +23,7 @@ const AuthLayout = () => {
             marginTop: 10,
           },
           tabBarStyle: {
-            backgroundColor: "#5f720f",
+            // backgroundColor: "#5f720f",
           },
         }}>
         <Tabs.Screen
@@ -62,6 +62,7 @@ const AuthLayout = () => {
           name={AppRoute.PROFILE.replace(`/`, ``)}
           options={{
             title: "Профиль",
+            headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon name="person" color={color} />
             ),
@@ -78,7 +79,6 @@ export default AuthLayout;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#c1d64d",
     paddingTop: Platform.OS === "ios" ? 0 : StatusBar.currentHeight,
   },
 }) as any;

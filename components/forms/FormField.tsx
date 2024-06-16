@@ -9,7 +9,9 @@ interface IFormField {
   inputStyle?: any;
   beforeIconName?: string | any;
   handleBeforeIcon?: () => void;
+  beforeIconStyle?: any;
   afterIconName?: string | any;
+  afterIconStyle: any;
   handleAfterIcon?: () => void;
   secureTextEntry?: boolean;
   [key: string]: any; // остаточный параметр
@@ -21,8 +23,10 @@ const FormField = (props: IFormField) => {
     containerStyle,
     inputStyle,
     beforeIconName,
+    beforeIconStyle,
     handleBeforeIcon,
     afterIconName,
+    afterIconStyle,
     handleAfterIcon,
     secureTextEntry,
     ...rest
@@ -35,7 +39,7 @@ const FormField = (props: IFormField) => {
       {beforeIconName && (
         <Octicons
           size={28}
-          style={styles.leftIcon}
+          style={[styles.leftIcon, beforeIconStyle]}
           name={beforeIconName}
           {...(handleBeforeIcon && { onPress: handleBeforeIcon })}
         />
@@ -43,7 +47,6 @@ const FormField = (props: IFormField) => {
       <TextInput
         placeholder={placeholder}
         placeholderTextColor="white"
-        selectionColor="transparent"
         secureTextEntry={isSecure}
         style={[styles.input, inputStyle]}
         {...rest}
@@ -51,7 +54,7 @@ const FormField = (props: IFormField) => {
       {afterIconName && (
         <Octicons
           size={28}
-          style={styles.leftIcon}
+          style={[styles.rightIcon, afterIconStyle]}
           name={afterIconName}
           {...(handleAfterIcon && { onPress: handleAfterIcon })}
         />
@@ -77,6 +80,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomWidth: 1,
     borderBottomColor: "white",
+    paddingHorizontal: 10,
   },
   input: {
     flex: 1,
@@ -88,10 +92,8 @@ const styles = StyleSheet.create({
   },
   leftIcon: {
     color: "white",
-    marginRight: 10,
   },
   rightIcon: {
     color: "white",
-    marginLeft: 10,
   },
 }) as any;

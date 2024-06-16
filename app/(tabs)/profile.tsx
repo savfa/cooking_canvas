@@ -1,13 +1,18 @@
 import React from "react";
 
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import Avatar from "@/components/Avatar";
+import SectionPrimary from "@/components/SectionPrimary";
 
 const Profile = () => (
-  <SafeAreaView style={styles.container}>
-    <View>
-      <Text>Profile</Text>
-    </View>
-  </SafeAreaView>
+  <View style={styles.container}>
+    <StatusBar barStyle="dark-content" />
+    <ScrollView style={styles.scrollView}>
+      <SectionPrimary>
+        <Avatar />
+      </SectionPrimary>
+    </ScrollView>
+  </View>
 );
 
 export default Profile;
@@ -15,7 +20,9 @@ export default Profile;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#fff",
+  },
+  scrollView: {
+    minHeight: "100%",
   },
 }) as any;
