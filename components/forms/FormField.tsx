@@ -11,7 +11,7 @@ interface IFormField {
   handleBeforeIcon?: () => void;
   beforeIconStyle?: any;
   afterIconName?: string | any;
-  afterIconStyle: any;
+  afterIconStyle?: any;
   handleAfterIcon?: () => void;
   secureTextEntry?: boolean;
   [key: string]: any; // остаточный параметр

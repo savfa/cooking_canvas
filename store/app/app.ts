@@ -9,6 +9,7 @@ import {
 } from "@/helpers/utils/asyncStorage";
 import { ServerURL } from "@/helpers/constants/routes";
 import { setAPIAuthHeaders } from "@/helpers/utils/setAPIAuthHeaders";
+import { getConfigUploadFile } from "@/helpers/utils/getConfigUploadFile";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -144,6 +145,24 @@ const Operation = {
       dispatch(actions.setAuthorization(AuthorizationStatus.NO_AUTH));
 
       return Promise.resolve("logout");
+    },
+  uploadUserAvatar:
+    (formData: any, setProgress?: any) =>
+    async (
+      dispatch: AppDispatch,
+      getState: () => StoreState,
+      api: AxiosInstance
+    ) => {
+      const configUploadFile = getConfigUploadFile(setProgress);
+
+      return api
+        .post(ServerURL.USER_UPLOAD_AVATAR, formData, configUploadFile)
+        .then((response) => {
+          const { data: user } = response.data;
+          dispatch(actions.setUser(user));
+
+          return user;
+        });
     },
 };
 

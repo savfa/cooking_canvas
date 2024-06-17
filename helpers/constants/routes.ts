@@ -1,6 +1,7 @@
 export const BASE_NAME = `/api/cooking`;
 export const ServerURL = {
   USER: `${BASE_NAME}/user/`,
+  USER_UPLOAD_AVATAR: `${BASE_NAME}/user/upload_avatar/`,
   LOGIN: `${BASE_NAME}/login/`,
   REGISTER: `${BASE_NAME}/register/`,
 };

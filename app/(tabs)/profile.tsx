@@ -3,17 +3,23 @@ import React from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import Avatar from "@/components/Avatar";
 import SectionPrimary from "@/components/SectionPrimary";
+import { useSelector } from "react-redux";
+import { getUser } from "@/store/app/selectors";
 
-const Profile = () => (
-  <View style={styles.container}>
-    <StatusBar barStyle="dark-content" />
-    <ScrollView style={styles.scrollView}>
-      <SectionPrimary>
-        <Avatar />
-      </SectionPrimary>
-    </ScrollView>
-  </View>
-);
+const Profile = () => {
+  const user = useSelector(getUser);
+
+  return (
+    <View style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      <ScrollView style={styles.scrollView}>
+        <SectionPrimary>
+          <Avatar avatarUrl={user.avatar} />
+        </SectionPrimary>
+      </ScrollView>
+    </View>
+  );
+};
 
 export default Profile;
 
