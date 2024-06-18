@@ -6,9 +6,12 @@ import { AppRoute } from "@/helpers/constants/routes";
 import { useSelector } from "react-redux";
 import { getAuthorizationStatus } from "@/store/app/selectors";
 import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import { useColorScheme } from "@/helpers/hooks/useColorScheme";
+import { Colors } from "@/helpers/constants/Colors";
 
 const AuthLayout = () => {
   const authorizationStatus = useSelector(getAuthorizationStatus);
+  const colorScheme = useColorScheme();
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -17,7 +20,7 @@ const AuthLayout = () => {
       <Tabs
         screenOptions={{
           headerShown: true,
-          tabBarActiveTintColor: "#000",
+          tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
           tabBarInactiveTintColor: "#707070",
           tabBarIconStyle: {
             marginTop: 10,

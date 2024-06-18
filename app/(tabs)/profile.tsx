@@ -5,6 +5,9 @@ import Avatar from "@/components/Avatar";
 import SectionPrimary from "@/components/SectionPrimary";
 import { useSelector } from "react-redux";
 import { getUser } from "@/store/app/selectors";
+import { ThemedText } from "@/components/ThemedText";
+import { HelloWave } from "@/components/HelloWave";
+import { ThemedView } from "@/components/ThemedView";
 
 const Profile = () => {
   const user = useSelector(getUser);
@@ -16,6 +19,11 @@ const Profile = () => {
         <SectionPrimary>
           <Avatar avatarUrl={user.avatar} />
         </SectionPrimary>
+
+        <ThemedView style={styles.titleContainer}>
+          <ThemedText type="title">Привет мир!</ThemedText>
+          <HelloWave />
+        </ThemedView>
       </ScrollView>
     </View>
   );
