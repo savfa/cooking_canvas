@@ -108,17 +108,17 @@ const Operation = {
         }),
   register:
     ({
-      name,
+      firstName,
       email,
       password,
     }: {
-      name: string;
+      firstName: string;
       email: string;
       password: string;
     }) =>
     (dispatch: AppDispatch, getState: () => StoreState, api: AxiosInstance) =>
       api
-        .post(ServerURL.REGISTER, { name, email, password })
+        .post(ServerURL.REGISTER, { firstName, email, password })
         .then((response) => {
           const {
             user,

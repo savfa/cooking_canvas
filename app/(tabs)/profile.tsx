@@ -8,35 +8,42 @@ import { getUser } from "@/store/app/selectors";
 import { ThemedText } from "@/components/ThemedText";
 import { HelloWave } from "@/components/HelloWave";
 import { ThemedView } from "@/components/ThemedView";
+import ThemedScreen from "@/components/ThemedScreen";
+import ParallaxScrollView from "@/components/ParallaxScrollView";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Profile = () => {
   const user = useSelector(getUser);
 
   return (
-    <View style={styles.container}>
+    <ThemedScreen>
       <StatusBar barStyle="dark-content" />
       <ScrollView style={styles.scrollView}>
         <SectionPrimary>
-          <Avatar avatarUrl={user.avatar} />
+          <View style={styles.userWrap}>
+            <Avatar avatarUrl={user.avatar} />
+            <ThemedText type="title">{`${user.lastName || ``} ${user.firstName || ``} ${user.patronymic || ``}`}</ThemedText>
+          </View>
         </SectionPrimary>
 
-        <ThemedView style={styles.titleContainer}>
+        <ThemedView>
           <ThemedText type="title">Привет мир!</ThemedText>
-          <HelloWave />
         </ThemedView>
       </ScrollView>
-    </View>
+    </ThemedScreen>
   );
 };
 
 export default Profile;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
   scrollView: {
-    minHeight: "100%",
+    height: "100%",
+  },
+  userWrap: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 }) as any;

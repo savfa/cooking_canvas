@@ -29,7 +29,7 @@ const AuthForm = (props: Iprops) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const [values, setValues] = useState<any>({
-    name: ``,
+    firstName: ``,
     email: ``,
     password: ``,
     confirmPassword: ``,
@@ -72,7 +72,7 @@ const AuthForm = (props: Iprops) => {
       handleSubmit = () => {
         dispatch(
           AppOperation.register({
-            name: values.name,
+            firstName: values.firstName,
             email: values.email,
             password: values.password,
           })
@@ -91,7 +91,14 @@ const AuthForm = (props: Iprops) => {
       questionActionText,
       handleQuestion,
     };
-  }, [isLogin, isRegister, values]);
+  }, [
+    dispatch,
+    isLogin,
+    isRegister,
+    values.email,
+    values.firstName,
+    values.password,
+  ]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -117,7 +124,9 @@ const AuthForm = (props: Iprops) => {
               <FormField
                 placeholder="Имя"
                 beforeIconName="person"
-                onChangeText={(value: string) => handleChange(`name`, value)}
+                onChangeText={(value: string) =>
+                  handleChange(`firstName`, value)
+                }
               />
             )}
             <FormField

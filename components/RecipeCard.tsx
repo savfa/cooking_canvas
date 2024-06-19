@@ -51,7 +51,7 @@ export default RecipeCard;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f1f1f1",
+    backgroundColor: "#ffffff",
     borderRadius: 16,
     width: "100%",
     maxHeight: 216,

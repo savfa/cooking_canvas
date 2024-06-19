@@ -26,6 +26,8 @@ const AuthLayout = () => {
             marginTop: 10,
           },
           tabBarStyle: {
+            borderTopLeftRadius: 16,
+            borderTopRightRadius: 16,
             // backgroundColor: "#5f720f",
           },
         }}>

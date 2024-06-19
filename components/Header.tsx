@@ -54,6 +54,8 @@ export default Header;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
+    borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16,
   },
   searchPanel: {
     display: "flex",
