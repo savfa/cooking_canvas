@@ -1,35 +1,77 @@
-import React from "react";
+import React, { useMemo } from "react";
 
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Pressable,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import Avatar from "@/components/Avatar";
 import SectionPrimary from "@/components/SectionPrimary";
 import { useSelector } from "react-redux";
 import { getUser } from "@/store/app/selectors";
 import { ThemedText } from "@/components/ThemedText";
-import { HelloWave } from "@/components/HelloWave";
-import { ThemedView } from "@/components/ThemedView";
 import ThemedScreen from "@/components/ThemedScreen";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import Octicons from "@expo/vector-icons/Octicons";
 
 const Profile = () => {
   const user = useSelector(getUser);
 
+  const listData = useMemo(
+    () => [
+      {
+        key: "userBox",
+        value: (
+          // todo: заменить на Link
+          <Pressable onPress={() => `в мои данные`}>
+            <SectionPrimary style={styles.userBox}>
+              <Avatar isHideEdit avatarUrl={user.avatar} />
+              <View
+                style={{
+                  display: `flex`,
+                  flexDirection: `row`,
+                  alignItems: `center`,
+                }}>
+                <ThemedText type="subtitle">{`${user.lastName || ``} ${user.firstName || ``} ${user.patronymic || ``}`}</ThemedText>
+                <Octicons
+                  size={20}
+                  name="arrow-right"
+                  color="#000"
+                  style={{ paddingLeft: 10 }}
+                />
+              </View>
+            </SectionPrimary>
+          </Pressable>
+        ),
+      },
+      {
+        key: "otherContent",
+        value: (
+          <SectionPrimary>
+            <View>
+              <ThemedText type="subtitle">контент с рецептами юзера</ThemedText>
+            </View>
+          </SectionPrimary>
+        ),
+      },
+    ],
+    [user.avatar, user.firstName, user.lastName, user.patronymic]
+  );
+
   return (
     <ThemedScreen>
       <StatusBar barStyle="dark-content" />
-      <ScrollView style={styles.scrollView}>
-        <SectionPrimary>
-          <View style={styles.userWrap}>
-            <Avatar avatarUrl={user.avatar} />
-            <ThemedText type="title">{`${user.lastName || ``} ${user.firstName || ``} ${user.patronymic || ``}`}</ThemedText>
-          </View>
-        </SectionPrimary>
-
-        <ThemedView>
-          <ThemedText type="title">Привет мир!</ThemedText>
-        </ThemedView>
-      </ScrollView>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          gap: 10,
+          paddingBottom: 10,
+        }}
+        data={listData}
+        renderItem={({ item: { value } }: any) => value}
+      />
     </ThemedScreen>
   );
 };
@@ -37,10 +79,8 @@ const Profile = () => {
 export default Profile;
 
 const styles = StyleSheet.create({
-  scrollView: {
-    height: "100%",
-  },
-  userWrap: {
+  userBox: {
+    paddingTop: (StatusBar.currentHeight || 0) + 10,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",

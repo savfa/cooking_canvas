@@ -22,7 +22,10 @@ const RootLayout = () => {
         <Stack>
           <Stack.Screen
             name="index"
-            options={{ title: "Приветствие", headerShown: false }}
+            options={{
+              title: "Приветствие",
+              headerShown: false,
+            }}
           />
           <Stack.Screen
             name="(auth)"
@@ -30,7 +33,10 @@ const RootLayout = () => {
           />
           <Stack.Screen
             name="(tabs)"
-            options={{ title: "Приложение", headerShown: false }}
+            options={{
+              title: "Приложение",
+              headerShown: false,
+            }}
           />
         </Stack>
       </Provider>

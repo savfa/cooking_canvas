@@ -10,10 +10,12 @@ import { BASE_SERVER_URL } from "@/helpers/api";
 
 interface IAvatarProps {
   avatarUrl: string | null;
+  isHideEdit?: boolean;
+  [key: string]: any;
 }
 
 const Avatar = (props: IAvatarProps) => {
-  const { avatarUrl } = props;
+  const { avatarUrl, isHideEdit, ...rest } = props;
   const dispatch = useDispatch<AppDispatch>();
 
   const [image, setImage] = useState<any>(null);
@@ -73,9 +75,11 @@ const Avatar = (props: IAvatarProps) => {
           </View>
         )}
       </View>
-      <Pressable onPress={pickImage} style={styles.editIcon}>
-        <Octicons size={20} name="pencil" color="#bebebe" />
-      </Pressable>
+      {!isHideEdit && (
+        <Pressable onPress={pickImage} style={styles.editIcon}>
+          <Octicons size={20} name="pencil" color="#bebebe" />
+        </Pressable>
+      )}
     </View>
   );
 };
@@ -102,7 +106,6 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
-  personIcon: {},
   editIcon: {
     position: "absolute",
     flex: 1,

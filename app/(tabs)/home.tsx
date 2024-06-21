@@ -33,7 +33,6 @@ const Home = () => {
         collapsable
         contentContainerStyle={{
           gap: 10,
-          backgroundColor: Colors[colorScheme].screenBackground,
           paddingBottom: 10,
         }}
         numColumns={2}

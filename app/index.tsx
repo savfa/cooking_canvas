@@ -8,12 +8,12 @@ import {
 } from "react-native";
 
 import { Images } from "@/helpers/constants/Images";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { AppOperation } from "@/store/app/app";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store";
 import { getAuthorizationStatus } from "@/store/app/selectors";
-import { router } from "expo-router";
+import {Redirect, router} from "expo-router";
 import { AppRoute } from "@/helpers/constants/routes";
 
 export default function Index() {
@@ -32,7 +32,7 @@ export default function Index() {
           router.push(AppRoute.LOGIN);
           break;
         case `AUTH`:
-          router.push(AppRoute.HOME);
+          router.replace(AppRoute.HOME);
           break;
         default:
           break;
@@ -45,7 +45,7 @@ export default function Index() {
   }, [authorizationStatus]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <StatusBar barStyle="light-content" />
       <ImageBackground
         source={Images.food}
@@ -60,7 +60,7 @@ export default function Index() {
           </View>
         </View>
       </ImageBackground>
-    </SafeAreaView>
+    </View>
   );
 }
 

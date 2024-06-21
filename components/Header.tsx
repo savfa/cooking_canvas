@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 
-import { View, StyleSheet, Platform } from "react-native";
+import { View, StyleSheet, Platform, StatusBar } from "react-native";
 import FormField from "@/components/forms/FormField";
 import Octicons from "@expo/vector-icons/Octicons";
 import SectionPrimary from "@/components/SectionPrimary";
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
+    paddingTop: (StatusBar.currentHeight || 0) + 10,
   },
   searchPanel: {
     display: "flex",
